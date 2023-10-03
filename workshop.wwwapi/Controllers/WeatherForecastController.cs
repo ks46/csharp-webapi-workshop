@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using workshop.wwwapi.Data;
 
 namespace workshop.wwwapi.Controllers;
 
@@ -20,7 +21,7 @@ public class WeatherForecastController : ControllerBase
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
-    {
+    {        
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
