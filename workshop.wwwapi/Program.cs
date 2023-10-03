@@ -1,3 +1,5 @@
+using workshop.wwwapi.EndPoints;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,10 +18,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+//app.MapGet("/hello/{name}", (string name, int age) => {
+//    return age > 40 ? $"hello {name}" : $"hello {name}.. you are an elder";
+//});
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.ConfigureCarApi();
 
 app.Run();
