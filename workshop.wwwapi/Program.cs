@@ -38,4 +38,6 @@ app.MapControllers();
 
 app.ConfigureCarApi();
 
+app.Seed();
+
 app.Run();

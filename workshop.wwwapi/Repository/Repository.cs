@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using workshop.wwwapi.Data;
+﻿using workshop.wwwapi.Data;
 using workshop.wwwapi.Models;
 
 namespace workshop.wwwapi.Repository
@@ -10,7 +9,7 @@ namespace workshop.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                return db.cars.ToList();
+                return db.Cars.ToList();
             }
         }
         public Car GetCar(int id)
@@ -19,7 +18,7 @@ namespace workshop.wwwapi.Repository
 
             using (var db = new DataContext())
             {
-                car = db.cars.FirstOrDefault(c => c.id == id);
+                car = db.Cars.FirstOrDefault(c => c.Id == id);
             }
 
             return car;
@@ -29,7 +28,7 @@ namespace workshop.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                db.cars.Add(car);
+                db.Cars.Add(car);
                 db.SaveChanges();
                 return true;
             }
@@ -40,10 +39,11 @@ namespace workshop.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                var target = db.cars.FirstOrDefault(a => a.id == id);
+                var target = db.Cars.FirstOrDefault(a => a.Id == id);
                 if (target != null)
                 {
                     db.Remove(target);
+                    db.SaveChanges();
                     return true;
                 }
             };
@@ -58,12 +58,13 @@ namespace workshop.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                var target = db.cars.FirstOrDefault(c => c.id == car.id); 
+                var target = db.Cars.FirstOrDefault(c => c.Id == car.Id); 
                 if (target != null)
                 {
-                    db.cars.Attach(target);
-                    target.make = car.make;
-                    target.model = car.model;
+                    db.Cars.Attach(target);
+                    target.Make = car.Make;
+                    target.Model = car.Model;
+                    target.PersonId = car.PersonId;
                     db.SaveChanges();
                     return true;
 
@@ -71,5 +72,21 @@ namespace workshop.wwwapi.Repository
             }
             return false;
         }
+
+        public bool DeletePerson(int id)
+        {
+            using (var db = new DataContext())
+            {
+                var target = db.People.FirstOrDefault(a => a.Id == id);
+                if (target != null)
+                {
+                    db.Remove(target);
+                    db.SaveChanges();
+                    return true;
+                }
+            };
+            return false;
+        }
+
     }
 }

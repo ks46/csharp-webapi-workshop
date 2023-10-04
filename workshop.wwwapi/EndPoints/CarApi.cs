@@ -11,8 +11,13 @@ namespace workshop.wwwapi.EndPoints
             app.MapGet("/cars", GetCars);
             app.MapGet("/cars/{id}", GetCar);
             app.MapPost("/cars", AddCar);
+            app.MapPut("/cars/{id}", UpdateCar);
+            app.MapDelete("/cars/{id}", DeleteCar);
 
-            
+            app.MapDelete("/person/{id}", DeletePerson);
+
+
+
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -85,6 +90,20 @@ namespace workshop.wwwapi.EndPoints
                     if (repository.UpdateCar(car)) return Results.Ok();
                     return Results.NotFound();
                 });
+
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
+        }
+
+        private static async Task<IResult> DeletePerson(int id, IRepository repository)
+        {
+            try
+            {
+                if (repository.DeletePerson(id)) return Results.Ok();
+                return Results.NotFound();
 
             }
             catch (Exception ex)

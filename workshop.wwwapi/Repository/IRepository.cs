@@ -10,5 +10,6 @@ namespace workshop.wwwapi.Repository
         bool AddCar(Car car);
         bool UpdateCar(Car car);
         bool DeleteCar(int id);
+        bool DeletePerson(int id);
     }
 }

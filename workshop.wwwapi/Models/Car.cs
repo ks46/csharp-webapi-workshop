@@ -1,13 +1,17 @@
-﻿namespace workshop.wwwapi.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace workshop.wwwapi.Models
 {
     public class Car
     {
-        public int id { get; set; }
-        public string make { get; set; }
-        public string model { get; set; }
-        public string enginetype { get; set; }
-        public string owner { get; set; }
-        public string colour { get; set; }
+        public int Id { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
+
 
 
     }

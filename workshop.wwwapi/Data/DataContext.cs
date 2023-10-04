@@ -16,6 +16,7 @@ namespace workshop.wwwapi.Data
             optionsBuilder.UseNpgsql(connectionString);
         }
 
-        public DbSet<Car> cars { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Person> People { get; set; }
     }
 }
